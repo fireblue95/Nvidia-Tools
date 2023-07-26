@@ -6,7 +6,7 @@ if [ $(lsmod | grep nouveau | wc -l) -ne 0 ]; then
 fi
 
 if [ "${1}" != "--out-dir" ] || [ "${2}" == "" ]; then
-    echo "Please give parameter --out-dir"
+    echo "Please give parameter --out-dir <out-dir-name>"
     exit 1
 fi
 
@@ -43,7 +43,7 @@ if [ ${USE_SUDO} -eq 1 ]; then
         python3 \
         make \
         gcc \
-        git \
+        git
     
     sudo apt-get install -y \
         software-properties-common \
@@ -66,7 +66,7 @@ else
         python3 \
         make \
         gcc \
-        git \
+        git
     
     apt-get install -y \
         software-properties-common \
@@ -87,6 +87,7 @@ else
     apt-get install -y cuda-toolkit-11-8
 fi
 
+echo "# Setting the CUDA Environment." >> ~/.bashrc
 echo "export PATH=/usr/local/cuda-11.8/bin:\$PATH" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH=/usr/local/cuda-11.8/targets/x86_64-linux/lib/:\${LD_LIBRARY_PATH}" >> ~/.bashrc
 
@@ -105,11 +106,11 @@ fi
 
 if [ ${USE_SUDO} -eq 1 ]; then
     sudo chmod 755 ${DRIVER_NAME}
-    sudo ./${DRIVER_NAME} --no-cc-version-check
+    sudo ./${DRIVER_NAME} --no-cc-version-check --silent
     sudo rm -rf ${DRIVER_NAME}
 else
     chmod 755 ${DRIVER_NAME}
-    ./${DRIVER_NAME} --no-cc-version-check
+    ./${DRIVER_NAME} --no-cc-version-check --silent
     rm -rf ${DRIVER_NAME}
 fi
 
@@ -150,6 +151,8 @@ else
 fi
 
 # Install librdkafka (to enable Kafka protocol adaptor for message broker)
+
+cd ${MAIN_DIR}
 
 if [ ${USE_SUDO} -eq 1 ]; then
     sudo rm -rf librdkafka
