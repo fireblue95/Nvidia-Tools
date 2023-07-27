@@ -5,7 +5,14 @@ if [ $(lsmod | grep nouveau | wc -l) -ne 0 ]; then
     exit 1
 fi
 
-if [ "${1}" != "--out-dir" ] || [ "${2}" == "" ]; then
+if [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
+    echo "Usage:"
+    echo "       bash install_deepstream.sh <option>"
+    echo "option - "
+    echo "       --out-dir <out-dir-name> - To provide the folder path where the libraries should be saved."
+    exit 0
+
+elif [ "${1}" != "--out-dir" ] || [ "${2}" == "" ]; then
     echo "Please give parameter --out-dir <out-dir-name>"
     exit 1
 fi
