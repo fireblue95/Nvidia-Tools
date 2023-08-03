@@ -1,6 +1,6 @@
 MAIN_DIR=$(pwd)
 USE_SUDO=1
-if [ $(dpkg -l | grep sudo | wc -l) -eq 0 ]; then
+if [ $(dpkg -l | grep -c sudo) -eq 0 ]; then
     USE_SUDO=0
 fi
 

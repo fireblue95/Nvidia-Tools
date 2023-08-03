@@ -1,6 +1,6 @@
 # Check nouveau status.
 
-if [ $(lsmod | grep nouveau | wc -l) -ne 0 ]; then
+if [ -f "/usr/bin/lsmod" ] && [ $(lsmod | grep -c nouveau) -ne 0 ]; then
     echo "nouveau is using, please run disable_nouveau.sh at first."
     exit 1
 fi
@@ -26,7 +26,7 @@ fi
 cd ${MAIN_DIR}
 
 USE_SUDO=1
-if [ $(dpkg -l | grep sudo | wc -l) -eq 0 ]; then
+if [ $(dpkg -l | grep -c sudo) -eq 0 ]; then
     USE_SUDO=0
 fi
 

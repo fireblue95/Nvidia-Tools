@@ -1,5 +1,5 @@
 USE_SUDO=1
-if [ $(dpkg -l | grep sudo | wc -l) -eq 0 ]; then
+if [ $(dpkg -l | grep -c sudo) -eq 0 ]; then
     USE_SUDO=0
 fi
 
@@ -11,14 +11,18 @@ if [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
     exit 0
 fi
 
+DS_EXISTS=$(dpkg -l | grep -c deepstream*)
+
 if [ ${USE_SUDO} -eq 1 ]; then
-    if [ $(dpkg -l | grep deepstream* | wc -l) -ne 0 ]; then
+    if [ ${DS_EXISTS} -ne 0 ]; then
        sudo apt remove --purge --autoremove -y deepstream-6.2
     fi
 
-    sudo rm -rf /usr/local/deepstream \
+    sudo rm -rf \
         /usr/bin/deepstream* \
+        /usr/local/deepstream \
         /opt/nvidia/deepstream \
+        /usr/local/lib/librdkafka* \
         /opt/nvidia/deepstream/deepstream* \
         /usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstnv* \
         /usr/lib/x86_64-linux-gnu/gstreamer-1.0/libnvdsgst* \
@@ -43,13 +47,15 @@ if [ ${USE_SUDO} -eq 1 ]; then
             python3-libnvinfer-dev=8.5.2-1+cuda11.8
     fi
 else
-    if [ $(dpkg -l | grep deepstream* | wc -l) -ne 0 ]; then
+    if [ ${DS_EXISTS} -ne 0 ]; then
         apt remove --purge --autoremove -y deepstream-6.2
     fi
 
-    rm -rf /usr/local/deepstream \
+    rm -rf \
         /usr/bin/deepstream* \
+        /usr/local/deepstream \
         /opt/nvidia/deepstream \
+        /usr/local/lib/librdkafka* \
         /opt/nvidia/deepstream/deepstream* \
         /usr/lib/x86_64-linux-gnu/gstreamer-1.0/libgstnv* \
         /usr/lib/x86_64-linux-gnu/gstreamer-1.0/libnvdsgst* \

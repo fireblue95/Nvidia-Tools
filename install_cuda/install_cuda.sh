@@ -56,6 +56,14 @@ ${CUDNN_INFO}
 
 ######################################################## CHECK ############################################################
 
+if [ "${1}" == "-h" ] || [ "${1}" == "--help" ]; then
+    echo "Usage:"
+    echo "       bash install_cuda.sh <option>"
+    echo "option - "
+    echo "       --remove - To remove cuda components (Nvidia-driver, CUDA, CUDNN) - Optional"
+    exit 0
+fi
+
 Ubuntu=$(cat /etc/lsb-release | grep DISTRIB_RELEASE | cut -d = -f 2)
 Ubuntu_VERSION=$(echo ${Ubuntu/./})
 

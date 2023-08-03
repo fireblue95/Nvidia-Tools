@@ -21,7 +21,7 @@ A comprehensive set of tools designed for effortlessly installing Nvidia package
         bash install_deepstream.sh --out-dir <out-dir-name>
         ```
     
-    #### Remove
+    #### Removal
 
     * Remove `DeepStream 6.2` entirely.
         ```bash
@@ -39,6 +39,19 @@ A comprehensive set of tools designed for effortlessly installing Nvidia package
 
     Prerequisite:
     * `DeepStream 6.2`
+
+    #### Usage
+
+    * Install `DeepStream Python`.
+        ```bash
+        bash install_deepstream_python.sh
+        ```
+    #### Removal
+
+    * Remove `DeepStream Python` entirely.
+        ```bash
+        bash remove_deepstream_python.sh
+        ```
 
 * Install CUDA - To install `CUDA` on `Ubuntu 22.04`, `Ubuntu 20.04`, and `Ubuntu 18.04`, only `x86_64` architecture is supported.  
     These packages will be installed.
@@ -94,12 +107,12 @@ A comprehensive set of tools designed for effortlessly installing Nvidia package
     ## Usage
 
     ```bash
-    ./install_cuda.sh
+    bash install_cuda.sh
     ```
 
     ## Remove Only
     Can remove `Nvidia-driver`, `CUDA`, `CUDNN`
     ```bash
-    ./install_cuda.sh --remove
+    bash install_cuda.sh --remove
     ```
     </details>
