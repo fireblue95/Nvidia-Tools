@@ -116,3 +116,9 @@ A comprehensive set of tools designed for effortlessly installing Nvidia package
     bash install_cuda.sh --remove
     ```
     </details>
+
+* Install Nvidia Docker
+    #### Usage
+    ```bash
+    bash install_nv_docker.sh
+    ```
